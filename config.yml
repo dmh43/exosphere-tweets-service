@@ -1,0 +1,26 @@
+name: Exosphere users service
+description: Manages user accounts in Exosphere applications
+
+setup: bin/setup
+startup:
+  command: node_modules/.bin/exo-js
+  online-text: online at port
+
+messages:
+  receives:
+    - users.create
+    - users.list
+  sends:
+    - users.created
+    - users.listed
+
+needs-dependencies:
+  - MongoDB
+
+# these configuration values have to be provided
+# by the runtime that uses this service
+# as environment variables when starting it
+external-configuration:
+  - mongodb-host
+  - mongodb-port
+  - database-name

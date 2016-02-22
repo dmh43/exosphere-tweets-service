@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+lsc --compile --bare --output dist src
