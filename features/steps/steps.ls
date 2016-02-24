@@ -46,7 +46,10 @@ module.exports = ->
 
 
   @When /^sending the message "([^"]*)" with the payload:$/, (message, payload) ->
-    eval livescript.compile "payload-json = {\n#{payload}\n}", bare: true, header: no
+    if payload[0] is '['
+      eval livescript.compile "payload-json = #{payload}", bare: true, header: no
+    else
+      eval livescript.compile "payload-json = {\n#{payload}\n}", bare: true, header: no
     @exocomm
       ..send-message service: 'snippets', name: message, payload: payload-json
 

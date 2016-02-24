@@ -21,17 +21,31 @@ Feature: Creating multiple snippets
   Scenario: creating valid snippets
     When sending the message "snippets.create-many" with the payload:
       """
-      * content: 'Monday'
-      * content: 'Tuesday'
+      [
+        * content: 'Monday'
+        * content: 'Tuesday'
+      ]
       """
     Then the service replies with "snippets.created" and the payload:
       """
-      * id: /\d+/
-        content: 'Monday'
-      * id: /\d+/
-        content: 'Tuesday'
+      count: 2
       """
     And the service contains the snippets:
       | CONTENT |
       | Monday  |
       | Tuesday |
+
+
+  Scenario: trying to create snippets with empty content
+    When sending the message "snippets.create-many" with the payload:
+      """
+      [
+        * content: 'Monday'
+        * content: ''
+      ]
+      """
+    Then the service replies with "snippets.not-created" and the payload:
+      """
+      error: 'Content cannot be blank'
+      """
+    And the service contains no snippets

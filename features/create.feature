@@ -21,7 +21,7 @@ Feature: Creating snippets
     Then the service replies with "snippets.created" and the payload:
       """
       id: /\d+/
-      name: 'Hello world'
+      content: 'Hello world'
       """
     And the service contains the snippets:
       | CONTENT     |
