@@ -21,9 +21,7 @@ module.exports =
     | not snippet-data.name  =>  return reply 'snippets.not-created', error: 'Name cannot be blank'
     collection.insert-one snippet-data, (err, result) ->
       | err  =>  return reply 'snippets.not-created', error: err
-      user = result.ops[0]
-      user.id = user._id ; delete user._id
-      reply 'snippets.created', user
+      reply 'snippets.created', mongo-to-id(result.ops[0])
 
 
   'snippets.create-many': (snippets, {reply}) ->
@@ -34,6 +32,16 @@ module.exports =
 
   'snippets.list': (_, {reply}) ->
     collection.find({}).to-array N (snippets) ->
-      for user in snippets
-        user.id = user._id ; delete user._id
+      mongo-to-ids snippets
       reply 'snippets.listed', {count: snippets.length, snippets}
+
+
+
+function mongo-to-id entry
+  entry.id = entry._id ; delete entry._id
+  entry
+
+
+function mongo-to-ids entries
+  for entry in entries
+    mongo-to-id entry
