@@ -13,7 +13,7 @@ Feature: Creating snippets
     And an instance of this service
 
 
-  Scenario: creating a valid user account
+  Scenario: creating a valid snippet
     When sending the message "snippets.create" with the payload:
       """
       content: 'Hello world'

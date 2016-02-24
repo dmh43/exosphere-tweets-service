@@ -1,5 +1,5 @@
-name: Exosphere users service
-description: Manages user accounts in Exosphere applications
+name: Exosphere snippets service
+description: Manages snippets of text associated with data
 
 setup: bin/setup
 startup:
@@ -8,11 +8,11 @@ startup:
 
 messages:
   receives:
-    - users.create
-    - users.list
+    - snippets.create
+    - snippets.list
   sends:
-    - users.created
-    - users.listed
+    - snippets.created
+    - snippets.listed
 
 needs-dependencies:
   - MongoDB

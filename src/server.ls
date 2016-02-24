@@ -17,9 +17,9 @@ module.exports =
       done!
 
 
-  'snippets.create': (user-data, {reply}) ->
-    | not user-data.name  =>  return reply 'snippets.not-created', error: 'Name cannot be blank'
-    collection.insert-one user-data, (err, result) ->
+  'snippets.create': (snippet-data, {reply}) ->
+    | not snippet-data.name  =>  return reply 'snippets.not-created', error: 'Name cannot be blank'
+    collection.insert-one snippet-data, (err, result) ->
       | err  =>  return reply 'snippets.not-created', error: err
       user = result.ops[0]
       user.id = user._id ; delete user._id

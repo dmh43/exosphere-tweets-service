@@ -1,7 +1,7 @@
 Feature: Listing all snippets
 
-  As a developer working on an application that uses snippets of content assigned to users
-  I want to have an easy way to get a list of all snippets for a user
+  As a developer working on an application that uses snippets of content assigned to snippets
+  I want to have an easy way to get a list of all snippets for a snippet
   So that I can display overview pages.
 
   Rules:

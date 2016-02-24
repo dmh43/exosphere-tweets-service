@@ -1,5 +1,5 @@
 {
-  "name": "exosphere-users-service",
+  "name": "exosphere-snippets-service",
   "version": "0.0.1",
   "author": "Kevin Goslar",
   "dependencies": {
@@ -10,7 +10,7 @@
     "mongodb": "2.1.7",
     "nitroglycerin": "1.0.3"
   },
-  "description": "An ExoSphere service that stores user accounts",
+  "description": "An ExoSphere service that stores textual attachments to other objects",
   "devDependencies": {
     "chai": "3.5.0",
     "cucumber": "0.9.5",

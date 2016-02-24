@@ -1,5 +1,5 @@
 {
-  "name": "exosphere-users-service",
+  "name": "exosphere-snippets-service",
   "version": "0.0.1",
   "dependencies": {
     "accepts": {
@@ -367,7 +367,8 @@
     },
     "exoservice": {
       "version": "0.11.0",
-      "from": "exoservice@>=0.11.0 <0.12.0"
+      "from": "exoservice@0.11.0",
+      "resolved": "https://registry.npmjs.org/exoservice/-/exoservice-0.11.0.tgz"
     },
     "express": {
       "version": "4.13.4",
@@ -3458,7 +3459,8 @@
     },
     "observable-process": {
       "version": "0.7.0",
-      "from": "observable-process@>=0.7.0 <0.8.0"
+      "from": "observable-process@0.7.0",
+      "resolved": "https://registry.npmjs.org/observable-process/-/observable-process-0.7.0.tgz"
     },
     "on-finished": {
       "version": "2.3.0",

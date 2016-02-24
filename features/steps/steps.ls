@@ -26,46 +26,46 @@ module.exports = ->
   @Given /^an instance of this service$/, (done) ->
     port-reservation
       ..get-port N (@service-port) ~>
-        @exocomm.register-service name: 'users', port: @service-port
-        @process = new ExoService service-name: 'users', exocomm-port: @exocomm.port, exorelay-port: @service-port
+        @exocomm.register-service name: 'snippets', port: @service-port
+        @process = new ExoService service-name: 'snippets', exocomm-port: @exocomm.port, exorelay-port: @service-port
           ..listen!
           ..on 'online', -> done!
 
 
-  @Given /^the service contains the users:$/, (table, done) ->
-    users = [{[key.to-lower-case!, value] for key, value of record} for record in table.hashes!]
+  @Given /^the service contains the snippets:$/, (table, done) ->
+    snippets = [{[key.to-lower-case!, value] for key, value of record} for record in table.hashes!]
     @exocomm
-      ..send-message service: 'users', name: 'users.create-many', payload: users
+      ..send-message service: 'snippets', name: 'snippets.create-many', payload: snippets
       ..wait-until-receive done
 
 
 
   @When /^sending the message "([^"]*)"$/, (message) ->
     @exocomm
-      ..send-message service: 'users', name: message
+      ..send-message service: 'snippets', name: message
 
 
   @When /^sending the message "([^"]*)" with the payload:$/, (message, payload) ->
     eval livescript.compile "payload-json = {\n#{payload}\n}", bare: true, header: no
     @exocomm
-      ..send-message service: 'users', name: message, payload: payload-json
+      ..send-message service: 'snippets', name: message, payload: payload-json
 
 
-  @Then /^the service contains no users$/, (done) ->
+  @Then /^the service contains no snippets/, (done) ->
     @exocomm
-      ..send-message service: 'users', name: 'users.list'
+      ..send-message service: 'snippets', name: 'snippets.list'
       ..wait-until-receive ~>
         expect(@exocomm.received-messages![0].payload.count).to.equal 0
         done!
 
 
-  @Then /^the service contains the user accounts:$/, (table, done) ->
+  @Then /^the service contains the snippet accounts:$/, (table, done) ->
     @exocomm
-      ..send-message service: 'users', name: 'users.list'
+      ..send-message service: 'snippets', name: 'snippets.list'
       ..wait-until-receive ~>
-        actual-users = remove-ids @exocomm.received-messages![0].payload.users
-        expected-users = [{[key.to-lower-case!, value] for key, value of user} for user in table.hashes!]
-        jsdiff-console actual-users, expected-users, done
+        actual-snippets = remove-ids @exocomm.received-messages![0].payload.snippets
+        expected-snippets = [{[key.to-lower-case!, value] for key, value of snippet} for snippet in table.hashes!]
+        jsdiff-console actual-snippets, expected-snippets, done
 
 
   @Then /^the service replies with "([^"]*)" and the payload:$/, (message, payload, done) ->

@@ -1,4 +1,4 @@
-# Exosphere User Service Developer Guidelines
+# Exosphere Snippet Service Developer Guidelines
 
 ## Install
 
