@@ -27,10 +27,10 @@ Feature: Listing all tweets
 
   Scenario: tweets exist in the database
     Given the service contains the tweets:
-      | OWNER | CONTENT                 |
-      | 1     | Hello world!            |
-      | 1     | Hello again!            |
-      | 2     | Tweet from another user |
+      | OWNER_ID | CONTENT                 |
+      | 1        | Hello world!            |
+      | 1        | Hello again!            |
+      | 2        | Tweet from another user |
     When sending the message "tweets.list" with the payload:
       """
       owner: 1
@@ -41,9 +41,9 @@ Feature: Listing all tweets
       tweets: [
         * content: 'Hello world!'
           id: /\d+/
-          owner_id: 1
+          owner_id: "1"
         * content: 'Hello again!'
           id: /\d+/
-          owner_id: 1
+          owner_id: "1"
       ]
       """

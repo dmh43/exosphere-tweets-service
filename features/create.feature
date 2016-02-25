@@ -16,11 +16,13 @@ Feature: Creating tweets
   Scenario: creating a valid tweet
     When sending the message "tweets.create" with the payload:
       """
+      owner_id: '1'
       content: 'Hello world'
       """
     Then the service replies with "tweets.created" and the payload:
       """
       id: /\d+/
+      owner_id: '1'
       content: 'Hello world'
       """
     And the service contains the tweets:
@@ -31,6 +33,7 @@ Feature: Creating tweets
   Scenario: trying to create a tweet with empty content
     When sending the message "tweets.create" with the payload:
       """
+      owner_id: '1'
       content: ''
       """
     Then the service replies with "tweets.not-created" and the payload:

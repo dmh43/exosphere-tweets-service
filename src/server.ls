@@ -32,15 +32,14 @@ module.exports =
       reply 'tweets.created-many', count: result.inserted-count
 
 
-  'tweets.list': (_, {reply}) ->
-    collection.find({}).to-array N (tweets) ->
+  'tweets.list': ({owner}, {reply}) ->
+    collection.find({"owner_id": owner.to-string!}).to-array N (tweets) ->
       mongo-to-ids tweets
       reply 'tweets.listed', {count: tweets.length, tweets}
 
 
 
 function empty-content tweet
-  console.log tweet
   tweet.content.length is 0
 
 

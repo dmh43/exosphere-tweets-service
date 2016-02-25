@@ -56,7 +56,7 @@ module.exports = ->
 
   @Then /^the service contains no tweets/, (done) ->
     @exocomm
-      ..send-message service: 'tweets', name: 'tweets.list'
+      ..send-message service: 'tweets', name: 'tweets.list', payload: { owner: '1' }
       ..wait-until-receive ~>
         expect(@exocomm.received-messages![0].payload.count).to.equal 0
         done!
