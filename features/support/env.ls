@@ -7,7 +7,7 @@ require! {
 db = null
 get-db = (done) ->
   return done db if db
-  MongoClient.connect "mongodb://localhost:27017/space-tweet-tweets", N (mongo-db) ->
+  MongoClient.connect "mongodb://localhost:27017/space-tweet-tweets-test", N (mongo-db) ->
     db := mongo-db
     done db
 
