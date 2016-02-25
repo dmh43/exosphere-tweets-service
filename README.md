@@ -1,12 +1,12 @@
-# Snippets Service [![Circle CI](https://circleci.com/gh/Originate/exosphere-snippets-service.svg?style=shield&circle-token=b8da91b53c5b269eeb2460e344f521461ffe9895)](https://circleci.com/gh/Originate/exosphere-snippets-service)
-> An Exosphere service for storing snippets of data, which are associated to something
+# Tweets Service [![Circle CI](https://circleci.com/gh/Originate/exosphere-tweets-service.svg?style=shield&circle-token=b8da91b53c5b269eeb2460e344f521461ffe9895)](https://circleci.com/gh/Originate/exosphere-tweets-service)
+> An Exosphere service for storing tweets of data, which are associated to something
 
-* snippets have
+* tweets have
   * an owner
     - referenced by id.
     - its up to the application to know which domain classes are owners,
-      locate a particular owner based on the given owner-id of a snippet,
-      and understand what the snippet means to its owner.
+      locate a particular owner based on the given owner-id of a tweet,
+      and understand what the tweet means to its owner.
   * content - text
 
 

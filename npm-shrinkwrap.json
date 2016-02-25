@@ -1,5 +1,5 @@
 {
-  "name": "exosphere-snippets-service",
+  "name": "exosphere-tweets-service",
   "version": "0.0.1",
   "dependencies": {
     "accepts": {

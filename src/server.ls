@@ -3,7 +3,7 @@ require! {
   'nitroglycerin' : N
   'prelude-ls' : {any}
 }
-debug = require('debug')('snippets-service')
+debug = require('debug')('tweets-service')
 env = require('get-env')('test')
 
 
@@ -12,40 +12,40 @@ collection = null
 module.exports =
 
   before-all: (done) ->
-    MongoClient.connect "mongodb://localhost:27017/space-tweet-snippets-#{env}", N (mongo-db) ->
-      collection := mongo-db.collection 'snippets'
+    MongoClient.connect "mongodb://localhost:27017/space-tweet-tweets-#{env}", N (mongo-db) ->
+      collection := mongo-db.collection 'tweets'
       debug 'MongoDB connected'
       done!
 
 
-  'snippets.create': (snippet-data, {reply}) ->
-    | empty-content snippet-data  =>  return reply 'snippets.not-created', error: 'Content cannot be blank'
-    collection.insert-one snippet-data, (err, result) ->
-      | err  =>  return reply 'snippets.not-created', error: err
-      reply 'snippets.created', mongo-to-id(result.ops[0])
+  'tweets.create': (tweet-data, {reply}) ->
+    | empty-content tweet-data  =>  return reply 'tweets.not-created', error: 'Content cannot be blank'
+    collection.insert-one tweet-data, (err, result) ->
+      | err  =>  return reply 'tweets.not-created', error: err
+      reply 'tweets.created', mongo-to-id(result.ops[0])
 
 
-  'snippets.create-many': (snippets, {reply}) ->
-    | any-empty-contents snippets  =>  return reply 'snippets.not-created', error: 'Content cannot be blank'
-    collection.insert snippets, (err, result) ->
-      | err  =>  return reply 'snippets.not-created-many', error: err
-      reply 'snippets.created-many', count: result.inserted-count
+  'tweets.create-many': (tweets, {reply}) ->
+    | any-empty-contents tweets  =>  return reply 'tweets.not-created', error: 'Content cannot be blank'
+    collection.insert tweets, (err, result) ->
+      | err  =>  return reply 'tweets.not-created-many', error: err
+      reply 'tweets.created-many', count: result.inserted-count
 
 
-  'snippets.list': (_, {reply}) ->
-    collection.find({}).to-array N (snippets) ->
-      mongo-to-ids snippets
-      reply 'snippets.listed', {count: snippets.length, snippets}
+  'tweets.list': (_, {reply}) ->
+    collection.find({}).to-array N (tweets) ->
+      mongo-to-ids tweets
+      reply 'tweets.listed', {count: tweets.length, tweets}
 
 
 
-function empty-content snippet
-  console.log snippet
-  snippet.content.length is 0
+function empty-content tweet
+  console.log tweet
+  tweet.content.length is 0
 
 
-function any-empty-contents snippets
-  any empty-content, snippets
+function any-empty-contents tweets
+  any empty-content, tweets
 
 
 function mongo-to-id entry

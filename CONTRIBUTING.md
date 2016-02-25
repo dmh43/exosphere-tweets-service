@@ -1,4 +1,4 @@
-# Exosphere Snippet Service Developer Guidelines
+# Exosphere Tweet Service Developer Guidelines
 
 ## Install
 

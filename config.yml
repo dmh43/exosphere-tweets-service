@@ -1,5 +1,5 @@
-name: Exosphere snippets service
-description: Manages snippets of text associated with data
+name: Exosphere tweets service
+description: Manages tweets of text associated with data
 
 setup: bin/setup
 startup:
@@ -8,11 +8,11 @@ startup:
 
 messages:
   receives:
-    - snippets.create
-    - snippets.list
+    - tweets.create
+    - tweets.list
   sends:
-    - snippets.created
-    - snippets.listed
+    - tweets.created
+    - tweets.listed
 
 needs-dependencies:
   - MongoDB
