@@ -16,7 +16,7 @@ Feature: Listing all tweets
   Scenario: no tweets exist in the database
     When sending the message "tweets.list" with the payload:
       """
-      owner: 1
+      owner_id: 1
       """
     Then the service replies with "tweets.listed" and the payload:
       """
@@ -33,7 +33,7 @@ Feature: Listing all tweets
       | 2        | Tweet from another user |
     When sending the message "tweets.list" with the payload:
       """
-      owner: 1
+      owner_id: 1
       """
     Then the service replies with "tweets.listed" and the payload:
       """

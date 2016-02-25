@@ -32,8 +32,9 @@ module.exports =
       reply 'tweets.created-many', count: result.inserted-count
 
 
-  'tweets.list': ({owner}, {reply}) ->
-    collection.find({"owner_id": owner.to-string!}).to-array N (tweets) ->
+  'tweets.list': ({owner_id}, {reply}) ->
+    console.log owner_id
+    collection.find({"owner_id": owner_id.to-string!}).to-array N (tweets) ->
       mongo-to-ids tweets
       reply 'tweets.listed', {count: tweets.length, tweets}
 
