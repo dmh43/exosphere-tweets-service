@@ -2,12 +2,9 @@
 > An Exosphere service for storing tweets of data, which are associated to something
 
 * tweets have
-  * an owner
-    - referenced by id.
-    - its up to the application to know which domain classes are owners,
-      locate a particular owner based on the given owner-id of a tweet,
-      and understand what the tweet means to its owner.
-  * content - text
+  * an owner (string)
+    - referenced via the attribute `owner_id`
+  * content (text)
 
 
 ## Installation
@@ -21,7 +18,7 @@
 * install dependencies
 
   ```
-  npm install
+  bin/setup
   ```
 
 
@@ -36,7 +33,7 @@
 * start the service
 
   ```
-  bin/start --exorelay-port 3000 --exocomm-port 3100
+  env SERVICE_NAME=tweets EXOCOMM_PORT=xxx EXORELAY_PORT=yyy exo-js
   ```
 
 
