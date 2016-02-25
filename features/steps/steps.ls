@@ -40,11 +40,6 @@ module.exports = ->
 
 
 
-  @When /^sending the message "([^"]*)"$/, (message) ->
-    @exocomm
-      ..send-message service: 'tweets', name: message
-
-
   @When /^sending the message "([^"]*)" with the payload:$/, (message, payload) ->
     if payload[0] is '['
       eval livescript.compile "payload-json = #{payload}", bare: true, header: no
@@ -54,21 +49,13 @@ module.exports = ->
       ..send-message service: 'tweets', name: message, payload: payload-json
 
 
+
   @Then /^the service contains no tweets/, (done) ->
     @exocomm
       ..send-message service: 'tweets', name: 'tweets.list', payload: { owner_id: '1' }
       ..wait-until-receive ~>
         expect(@exocomm.received-messages![0].payload.count).to.equal 0
         done!
-
-
-  @Then /^the service contains the tweet accounts:$/, (table, done) ->
-    @exocomm
-      ..send-message service: 'tweets', name: 'tweets.list'
-      ..wait-until-receive ~>
-        actual-tweet = remove-ids @exocomm.received-messages![0].payload.tweets
-        expected-tweets = [{[key.to-lower-case!, value] for key, value of tweet} for tweet in table.hashes!]
-        jsdiff-console actual-tweets, expected-tweets, done
 
 
   @Then /^the service replies with "([^"]*)" and the payload:$/, (message, payload, done) ->
