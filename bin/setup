@@ -27,5 +27,7 @@ echo
 rm -rf node_modules
 npm i --depth 0
 
+build
+
 echo
-echo Documents service successfully installed.
+echo Tweets service successfully installed.
