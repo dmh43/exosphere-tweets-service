@@ -33,9 +33,7 @@
   "main": "app.ls",
   "private": true,
   "scripts": {
-    "postpublish": "git push && git push --tags",
     "prepublish": "bin/build",
-    "preversion": "bin/update-check && bin/spec",
     "test": "bin/spec"
   }
 }

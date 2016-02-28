@@ -5,6 +5,7 @@ allowUnused:
   - cucumber
   - dependency-lint
   - exoservice
+  - o-tools
 
 devFilePatterns:
   - '{features,spec,test}/**/*'
