@@ -33,7 +33,6 @@ module.exports =
 
 
   'tweets.list': ({owner_id}, {reply}) ->
-    console.log owner_id
     collection.find({"owner_id": owner_id.to-string!}).to-array N (tweets) ->
       mongo-to-ids tweets
       reply 'tweets.listed', {count: tweets.length, tweets}
