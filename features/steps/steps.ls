@@ -1,6 +1,6 @@
 require! {
   'chai' : {expect}
-  'exocomm-mock' : ExoCommMock
+  'exocom-mock' : ExoComMock
   'exoservice' : ExoService
   'jsdiff-console'
   'livescript'
@@ -15,25 +15,25 @@ require! {
 
 module.exports = ->
 
-  @Given /^an ExoComm server$/, (done) ->
+  @Given /^an ExoCom server$/, (done) ->
     port-reservation
-      ..get-port N (@exocomm-port) ~>
-        @exocomm = new ExoCommMock
-          ..listen @exocomm-port, done
+      ..get-port N (@exocom-port) ~>
+        @exocom = new ExoComMock
+          ..listen @exocom-port, done
 
 
   @Given /^an instance of this service$/, (done) ->
     port-reservation
       ..get-port N (@service-port) ~>
-        @exocomm.register-service name: 'tweets', port: @service-port
-        @process = new ExoService service-name: 'tweets', exocomm-port: @exocomm.port, exorelay-port: @service-port
+        @exocom.register-service name: 'tweets', port: @service-port
+        @process = new ExoService service-name: 'tweets', exocom-port: @exocom.port, exorelay-port: @service-port
           ..listen!
           ..on 'online', -> done!
 
 
   @Given /^the service contains the tweets:$/, (table, done) ->
     tweets = [{[key.to-lower-case!, value] for key, value of record} for record in table.hashes!]
-    @exocomm
+    @exocom
       ..send-message service: 'tweets', name: 'tweets.create-many', payload: tweets
       ..wait-until-receive done
 
@@ -44,21 +44,21 @@ module.exports = ->
       eval livescript.compile "payload-json = #{payload}", bare: true, header: no
     else
       eval livescript.compile "payload-json = {\n#{payload}\n}", bare: true, header: no
-    @exocomm
+    @exocom
       ..send-message service: 'tweets', name: message, payload: payload-json
 
 
 
   @Then /^the service contains no tweets/, (done) ->
-    @exocomm
+    @exocom
       ..send-message service: 'tweets', name: 'tweets.list', payload: { owner_id: '1' }
       ..wait-until-receive ~>
-        expect(@exocomm.received-messages![0].payload.count).to.equal 0
+        expect(@exocom.received-messages![0].payload.count).to.equal 0
         done!
 
 
   @Then /^the service replies with "([^"]*)" and the payload:$/, (message, payload, done) ->
-    @exocomm.wait-until-receive ~>
-      actual-payload = @exocomm.received-messages![0].payload
+    @exocom.wait-until-receive ~>
+      actual-payload = @exocom.received-messages![0].payload
       eval livescript.compile "expected-payload = {\n#{payload}\n}", bare: yes, header: no
       jsdiff-console remove-ids(actual-payload), remove-ids(expected-payload), done

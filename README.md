@@ -33,7 +33,7 @@
 * start the service
 
   ```
-  env SERVICE_NAME=tweets EXOCOMM_PORT=xxx EXORELAY_PORT=yyy exo-js
+  env SERVICE_NAME=tweets EXOCOM_PORT=xxx EXORELAY_PORT=yyy exo-js
   ```
 
 

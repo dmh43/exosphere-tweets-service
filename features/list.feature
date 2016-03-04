@@ -9,7 +9,7 @@ Feature: Listing all tweets
 
 
   Background:
-    Given an ExoComm server
+    Given an ExoCom server
     And an instance of this service
 
 
