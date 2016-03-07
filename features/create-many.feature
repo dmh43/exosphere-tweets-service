@@ -26,7 +26,7 @@ Feature: Creating multiple tweets
         * content: 'Tuesday'
       ]
       """
-    Then the service replies with "tweets.created" and the payload:
+    Then the service replies with "tweets.created-many" and the payload:
       """
       count: 2
       """

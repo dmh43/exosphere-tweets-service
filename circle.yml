@@ -1,15 +1,17 @@
 machine:
   node:
-    version: 5.1.0
+    version: 5.5.0
 
 
 test:
+
   pre:
     - bin/build
+    - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
+
   override:
     - bin/lint
-    - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
-    - NODE_ENV='test' cucumber-js --tags ~@todo --format json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --format pretty
+    - cucumber-js --format json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --format pretty
 
 
 deployment:

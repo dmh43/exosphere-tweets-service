@@ -1,5 +1,6 @@
 require! {
   'chai' : {expect}
+  'dim-console'
   'exocom-mock' : ExoComMock
   'exoservice' : ExoService
   'jsdiff-console'
@@ -8,7 +9,6 @@ require! {
   'port-reservation'
   'record-http' : HttpRecorder
   'request'
-  '../support/remove-ids' : {remove-ids}
   'wait' : {wait-until}
 }
 
@@ -39,17 +39,22 @@ module.exports = ->
 
 
 
-  @When /^sending the message "([^"]*)" with the payload:$/, (message, payload) ->
-    if payload[0] is '['
-      eval livescript.compile "payload-json = #{payload}", bare: true, header: no
-    else
-      eval livescript.compile "payload-json = {\n#{payload}\n}", bare: true, header: no
-    @exocom
-      ..send-message service: 'tweets', name: message, payload: payload-json
+  @When /^sending the message "([^"]*)"$/, (message) ->
+    @exocom.send-message service: 'tweets', name: message
+
+
+  @When /^sending the message "([^"]*)" with the payload:$/, (message, payload, done) ->
+    @fill-in-tweet-ids payload, (filled-payload) ~>
+      if filled-payload[0] is '['   # payload is an array
+        eval livescript.compile "payload-json = #{filled-payload}", bare: true, header: no
+      else                          # payload is a hash
+        eval livescript.compile "payload-json = {\n#{filled-payload}\n}", bare: true, header: no
+      @exocom.send-message service: 'tweets', name: message, payload: payload-json
+      done!
 
 
 
-  @Then /^the service contains no tweets/, (done) ->
+  @Then /^the service contains no tweets$/, (done) ->
     @exocom
       ..send-message service: 'tweets', name: 'tweets.list', payload: { owner_id: '1' }
       ..wait-until-receive ~>
@@ -57,8 +62,17 @@ module.exports = ->
         done!
 
 
+  @Then /^the service now contains the tweets:$/, (table, done) ->
+    @exocom
+      ..send-message service: 'tweets', name: 'tweets.list', payload: { owner_id: '1' }
+      ..wait-until-receive ~>
+        actual-tweets = @remove-ids @exocom.received-messages![0].payload.tweets
+        expected-tweets = [{[key.to-lower-case!, value] for key, value of tweet} for tweet in table.hashes!]
+        jsdiff-console actual-tweets, expected-tweets, done
+
+
   @Then /^the service replies with "([^"]*)" and the payload:$/, (message, payload, done) ->
+    eval livescript.compile "expected-payload = {\n#{payload}\n}", bare: yes, header: no
     @exocom.wait-until-receive ~>
       actual-payload = @exocom.received-messages![0].payload
-      eval livescript.compile "expected-payload = {\n#{payload}\n}", bare: yes, header: no
-      jsdiff-console remove-ids(actual-payload), remove-ids(expected-payload), done
+      jsdiff-console @remove-ids(actual-payload), @remove-ids(expected-payload), done

@@ -4,12 +4,12 @@
 allowUnused:
   - cucumber
   - dependency-lint
-  - exoservice
+  - livescript
   - o-tools
 
 devFilePatterns:
   - '{features,spec,test}/**/*'
-  - '**/*_{spec,test}.ls'
+  - '**/*{spec,test}.ls'
 
 devScripts:
   - lint

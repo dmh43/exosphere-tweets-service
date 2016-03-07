@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-echo Installing dependencies for the Documents Service
+echo Installing dependencies for the Tweets Service
 echo
 
 command -v mongo >/dev/null 2>&1 || { echo "Please install MongoDB." >&2; exit 1; }
@@ -26,8 +26,6 @@ echo
 
 rm -rf node_modules
 npm i --depth 0
-
-build
 
 echo
 echo Tweets service successfully installed.

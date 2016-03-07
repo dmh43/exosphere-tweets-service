@@ -1,7 +1,7 @@
 Feature: Creating tweets
 
   Rules:
-  - tweets must have a name
+  - tweets must have a content
   - when successful, the service replies with "tweets.created"
     and the newly created account
   - when there is an error, the service replies with "tweets.not-created"
@@ -25,9 +25,9 @@ Feature: Creating tweets
       owner_id: '1'
       content: 'Hello world'
       """
-    And the service contains the tweets:
-      | CONTENT     |
-      | Hello world |
+    And the service now contains the tweets:
+      | CONTENT     | OWNER_ID |
+      | Hello world | 1        |
 
 
   Scenario: trying to create a tweet with empty content

@@ -1,26 +1,23 @@
 name: Exosphere tweets service
-description: Manages tweets of text associated with data
+description: Manages tweets in Exosphere applications
 
-setup: bin/setup
+setup: npm install
 startup:
   command: node_modules/.bin/exo-js
   online-text: online at port
+
 
 messages:
   receives:
     - tweets.create
     - tweets.list
+    - tweet.get-details
+    - tweet.update
+    - tweet.delete
   sends:
     - tweets.created
     - tweets.listed
-
-needs-dependencies:
-  - MongoDB
-
-# these configuration values have to be provided
-# by the runtime that uses this service
-# as environment variables when starting it
-external-configuration:
-  - mongodb-host
-  - mongodb-port
-  - database-name
+    - tweet.details
+    - tweet.not-found
+    - tweet.updated
+    - tweet.deleted
