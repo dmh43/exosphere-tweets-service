@@ -1,7 +1,7 @@
 Feature: Updating a tweet
 
   Rules:
-  - when receiving "tweet.update", updates the tweet with the given id and returns "tweet.updated" with the new record
+  - when receiving "tweets.update", updates the tweet with the given id and returns "tweets.updated" with the new record
 
 
   Background:
@@ -15,12 +15,12 @@ Feature: Updating a tweet
 
 
   Scenario: updating an existing tweet
-    When sending the message "tweet.update" with the payload:
+    When sending the message "tweets.update" with the payload:
       """
       id: '<%= @id_of 'Tuesday' %>'
       content: 'Dienstag'
       """
-    Then the service replies with "tweet.updated" and the payload:
+    Then the service replies with "tweets.updated" and the payload:
       """
       id: /.+/
       content: 'Dienstag'
@@ -34,12 +34,12 @@ Feature: Updating a tweet
 
 
   Scenario: trying to update a non-existing tweet
-    When sending the message "tweet.update" with the payload:
+    When sending the message "tweets.update" with the payload:
       """
       id: 'zonk'
       content: 'feel the zonk'
       """
-    Then the service replies with "tweet.not-found" and the payload:
+    Then the service replies with "tweets.not-found" and the payload:
       """
       id: 'zonk'
       """

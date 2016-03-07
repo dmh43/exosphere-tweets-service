@@ -1,7 +1,7 @@
 Feature: Deleting a tweet
 
   Rules:
-  - when receiving "tweet.delete", removes the tweet with the given id and returns "tweet.deleted"
+  - when receiving "tweets.delete", removes the tweet with the given id and returns "tweets.deleted"
 
 
   Background:
@@ -15,11 +15,11 @@ Feature: Deleting a tweet
 
 
   Scenario: deleting an existing tweet
-    When sending the message "tweet.delete" with the payload:
+    When sending the message "tweets.delete" with the payload:
       """
       id: '<%= @id_of 'Tuesday' %>'
       """
-    Then the service replies with "tweet.deleted" and the payload:
+    Then the service replies with "tweets.deleted" and the payload:
       """
       id: /.+/
       content: 'Tuesday'
@@ -32,11 +32,11 @@ Feature: Deleting a tweet
 
 
   Scenario: trying to delete a non-existing tweet
-    When sending the message "tweet.delete" with the payload:
+    When sending the message "tweets.delete" with the payload:
       """
       id: 'zonk'
       """
-    Then the service replies with "tweet.not-found" and the payload:
+    Then the service replies with "tweets.not-found" and the payload:
       """
       id: 'zonk'
       """

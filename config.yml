@@ -11,13 +11,13 @@ messages:
   receives:
     - tweets.create
     - tweets.list
-    - tweet.get-details
-    - tweet.update
-    - tweet.delete
+    - tweets.get-details
+    - tweets.update
+    - tweets.delete
   sends:
     - tweets.created
     - tweets.listed
-    - tweet.details
-    - tweet.not-found
-    - tweet.updated
-    - tweet.deleted
+    - tweets.details
+    - tweets.not-found
+    - tweets.updated
+    - tweets.deleted

@@ -19,60 +19,60 @@ module.exports =
       done!
 
 
-  'tweet.get-details': (query, {reply}) ->
+  'tweets.get-details': (query, {reply}) ->
     try
       mongo-query = id-to-mongo query
     catch
       console.log "the given query (#{query}) contains an invalid id"
-      return reply 'tweet.not-found', query
+      return reply 'tweets.not-found', query
     collection.find(mongo-query).to-array N (tweets) ->
       if tweets.length is 0
         console.log "tweet '#{util.inspect mongo-query}' not found"
-        return reply 'tweet.not-found', query
+        return reply 'tweets.not-found', query
       tweet = tweets[0]
       mongo-to-id tweet
       console.log "reading tweet '#{tweet.content}' (#{tweet.id})"
-      reply 'tweet.details', tweet
+      reply 'tweets.details', tweet
 
 
-  'tweet.update': (tweet-data, {reply}) ->
+  'tweets.update': (tweet-data, {reply}) ->
     try
       id = new ObjectID tweet-data.id
     catch
       console.log "the given query (#{tweet-data}) contains an invalid id"
-      return reply 'tweet.not-found', id: tweet-data.id
+      return reply 'tweets.not-found', id: tweet-data.id
     delete tweet-data.id
     collection.update-one {_id: id}, {$set: tweet-data}, N (result) ->
       switch result.modified-count
         | 0  =>
             console.log "tweet '#{id}' not updated because it doesn't exist"
-            return reply 'tweet.not-found'
+            return reply 'tweets.not-found'
         | _  =>
             collection.find(_id: id).to-array N (tweets) ->
               tweet = tweets[0]
               mongo-to-id tweet
               console.log "updating tweet '#{tweet.content}' (#{tweet.id})"
-              reply 'tweet.updated', tweet
+              reply 'tweets.updated', tweet
 
 
-  'tweet.delete': (query, {reply}) ->
+  'tweets.delete': (query, {reply}) ->
     try
       id = new ObjectID query.id
     catch
       console.log "the given query (#{util.inspect query}) contains an invalid id"
-      return reply 'tweet.not-found', id: query.id
+      return reply 'tweets.not-found', id: query.id
     collection.find(_id: id).to-array N (tweets) ->
       if tweets.length is 0
         console.log "tweet '#{id}' not deleted because it doesn't exist"
-        return reply 'tweet.not-found', query
+        return reply 'tweets.not-found', query
       tweet = tweets[0]
       mongo-to-id tweet
       collection.delete-one _id: id, N (result) ->
         if result.deleted-count is 0
           console.log "tweet '#{id}' not deleted because it doesn't exist"
-          return reply 'tweet.not-found', query
+          return reply 'tweets.not-found', query
         console.log "deleting tweet '#{tweet.content}' (#{tweet.id})"
-        reply 'tweet.deleted', tweet
+        reply 'tweets.deleted', tweet
 
 
   'tweets.create': (tweet-data, {reply}) ->
