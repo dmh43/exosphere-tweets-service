@@ -25,7 +25,7 @@ Feature: Listing all tweets
       """
 
 
-  Scenario: tweets exist in the database
+  Scenario: listing tweets of a user
     Given the service contains the tweets:
       | OWNER_ID | CONTENT                 |
       | 1        | Hello world!            |
@@ -45,5 +45,29 @@ Feature: Listing all tweets
         * content: 'Hello again!'
           id: /\d+/
           owner_id: "1"
+      ]
+      """
+
+
+  Scenario: listing tweets of all users
+    Given the service contains the tweets:
+      | OWNER_ID | CONTENT                 |
+      | 1        | Hello world!            |
+      | 1        | Hello again!            |
+      | 2        | Tweet from another user |
+    When sending the message "tweets.list"
+    Then the service replies with "tweets.listed" and the payload:
+      """
+      count: 3
+      tweets: [
+        * content: 'Hello world!'
+          id: /\d+/
+          owner_id: '1'
+        * content: 'Hello again!'
+          id: /\d+/
+          owner_id: '1'
+        * content: 'Tweet from another user'
+          id: /\d+/
+          owner_id: '2'
       ]
       """
