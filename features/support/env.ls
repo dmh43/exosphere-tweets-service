@@ -33,4 +33,3 @@ module.exports = ->
       db.collection('tweets')?.drop!
       db.close!
       done!
-
