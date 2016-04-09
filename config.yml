@@ -6,18 +6,18 @@ startup:
   command: node_modules/.bin/exo-js
   online-text: online at port
 
-
 messages:
+  namespace: tweets
   receives:
-    - tweets.create
-    - tweets.list
-    - tweets.get-details
-    - tweets.update
-    - tweets.delete
+    - create
+    - list
+    - get-details
+    - update
+    - delete
   sends:
-    - tweets.created
-    - tweets.listed
-    - tweets.details
-    - tweets.not-found
-    - tweets.updated
-    - tweets.deleted
+    - created
+    - listed
+    - details
+    - not-found
+    - updated
+    - deleted
