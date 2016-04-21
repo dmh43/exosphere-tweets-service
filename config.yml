@@ -9,15 +9,15 @@ startup:
 
 messages:
   receives:
-    - mongo.create
-    - mongo.list
-    - mongo.get-details
-    - mongo.update
-    - mongo.delete
+    - tweets.create
+    - tweets.list
+    - tweets.get-details
+    - tweets.update
+    - tweets.delete
   sends:
-    - mongo.created
-    - mongo.listed
-    - mongo.details
-    - mongo.not-found
-    - mongo.updated
-    - mongo.deleted
+    - tweets.created
+    - tweets.listed
+    - tweets.details
+    - tweets.not-found
+    - tweets.updated
+    - tweets.deleted
