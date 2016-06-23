@@ -30,7 +30,7 @@ Feature: Creating entries
       | Hello world | 1        |
 
 
-  Scenario: trying to create a entry with empty content
+  Scenario: trying to create an entry with empty content
     When sending the message "mongo.create" with the payload:
       """
       owner_id: '1'
