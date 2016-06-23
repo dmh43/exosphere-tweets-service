@@ -20,7 +20,7 @@ module.exports = ->
 
   @Before (_scenario, done) ->
     get-db (db) ->
-      db.collection('exosphere-mongo-service-test')?.drop!
+      db.collection('tweets')?.drop!
       done!
 
   @After ->
