@@ -115,9 +115,9 @@
       "resolved": "https://registry.npmjs.org/brace-expansion/-/brace-expansion-1.1.5.tgz"
     },
     "bson": {
-      "version": "0.5.0",
-      "from": "bson@>=0.5.0 <0.6.0",
-      "resolved": "https://registry.npmjs.org/bson/-/bson-0.5.0.tgz"
+      "version": "0.5.2",
+      "from": "bson@>=0.5.1 <0.6.0",
+      "resolved": "https://registry.npmjs.org/bson/-/bson-0.5.2.tgz"
     },
     "bytes": {
       "version": "2.4.0",
@@ -821,14 +821,14 @@
       "resolved": "https://registry.npmjs.org/minimist/-/minimist-1.2.0.tgz"
     },
     "mongodb": {
-      "version": "2.2.0",
-      "from": "mongodb@2.2.0",
-      "resolved": "https://registry.npmjs.org/mongodb/-/mongodb-2.2.0.tgz"
+      "version": "2.2.4",
+      "from": "mongodb@2.2.4",
+      "resolved": "https://registry.npmjs.org/mongodb/-/mongodb-2.2.4.tgz"
     },
     "mongodb-core": {
-      "version": "2.0.3",
-      "from": "mongodb-core@2.0.3",
-      "resolved": "https://registry.npmjs.org/mongodb-core/-/mongodb-core-2.0.3.tgz"
+      "version": "2.0.6",
+      "from": "mongodb-core@2.0.6",
+      "resolved": "https://registry.npmjs.org/mongodb-core/-/mongodb-core-2.0.6.tgz"
     },
     "ms": {
       "version": "0.7.1",
